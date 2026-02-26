@@ -1,0 +1,41 @@
+{% block content %}
+<div class="container" dir="ltr">
+    <h1 class="text-center">To Do List</h1>
+    <div class="text-center mb-4">
+</div>
+<form action="{% url 'search_to' %}" method="get" class="mb-4">
+    {% csrf_token %}
+      <div class="d-flex gap-2">
+          <label for="search" class="form-label">Search Tasks:</label>
+          <input type="text" id="search" name="title_search_html" class="form-control" placeholder="Enter task title ">
+          <button type="submit" class="btn btn-primary mt-2">Search</button>
+      </div>
+</form>
+<table class="table table-bordered"dir="ltr" border="1">
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Completed</th>
+      <th>Date Created</th>
+      <th>Actions</th>
+    </tr>
+    <tbody>
+      {% for todo in search_results %}
+      <tr>
+      <td>{{todo.title}}</td>
+      <td>{{todo.description}}</td>
+      <td>{{todo.completed}}</td>
+      <td>{{todo.date_created}}</td>
+      <td>
+        <a href="{% url 'details_to' todo.id %}" class="btn btn-success btn-sm">View Details</a>
+        <a href="{% url 'edit_to' todo.id %}" class="btn btn-info btn-sm">Edit</a>
+        <a href="{% url 'delete_to' todo.id %}" class="btn btn-danger btn-sm">Delete</a>
+      </td>
+      </tr>
+      {%endfor%}
+    </tbody>
+</table> 
+<div> 
+<a href="{% url 'add_to' %}" class="btn btn-primary">Add New Task</a>
+</div>
+{% endblock %}

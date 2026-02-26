@@ -1,0 +1,11 @@
+{% block content %}
+<div class="container" dir="ltr">
+    <h1 class="text-center">Task Details</h1>
+    <div class="text-center mb-4">
+</div>
+<form method="post">
+    {% csrf_token %}
+    {{ formedit.as_p }}
+</form>
+<a href="{% url 'home' %}" class="btn btn-secondary mt-3">Back to Home</a>
+{% endblock %}
